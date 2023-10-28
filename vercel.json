@@ -1,9 +1,10 @@
 {
     "version": 2,
-    "name": "backend-e-com",
-    "builds": [{ "src": "./backend/server.js", "use": "@vercel/node" }],
+    "name": "test-backend",
+    "builds": [
+       { "src": "./server.js", "use": "@vercel/node" }
+    ],
     "routes": [
-      { "src": "/(.*)", "dest": "./backend/server.js" } 
+       { "src": "/(.*)", "dest": "server.js" }
     ]
-  }
-  
+ }
