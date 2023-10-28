@@ -27,8 +27,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hello" });
+app.get('/', async (req, res) => {
+  try {
+
+    res.json("Hello");
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 app.use("/api/products", productRoutes);
