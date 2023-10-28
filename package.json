@@ -22,7 +22,6 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "echo jsom-e-com",
     "test": "mocha"
   },
   "keywords": [],
