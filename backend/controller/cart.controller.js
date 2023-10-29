@@ -24,6 +24,20 @@ const getCartProducts = (req, res) => {
 const addProductInCart = (req, res) => {
   const { productId, count } = req.body;
   const userId = req.user.id;
+
+  // Custom validation functions
+  const isNumeric = (value) => !isNaN(parseFloat(value)) && isFinite(value);
+
+  // Validate productId
+  if (!productId || !isNumeric(productId)) {
+    return res.status(400).json({ error: 'Invalid product ID' });
+  }
+
+  // Validate count
+  if (!count || !isNumeric(count)) {
+    return res.status(400).json({ error: 'Invalid count' });
+  }
+
   const upsertCartQuery = `
     INSERT INTO cart (userId, productId, count)
     VALUES (?, ?, ?)
@@ -39,6 +53,7 @@ const addProductInCart = (req, res) => {
     }
   });
 };
+
 
 const deleteProductInCart = (req, res) => {
   const cartId = req.params.id;
