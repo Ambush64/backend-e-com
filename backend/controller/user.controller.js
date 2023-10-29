@@ -6,6 +6,11 @@ const connection = connectDB();
 
 const signUpUser = (req, res, callback) => {
   const { email, fullName, password } = req.body;
+
+  if (!validateEmail(email)) {
+    return res.status(400).json({ message: 'Invalid email format' });
+  }
+
   bcrypt.hash(password, 8, (hashError, hash) => {
     if (hashError) {
       console.error('Error: ', hashError);
@@ -25,7 +30,10 @@ const signUpUser = (req, res, callback) => {
   });
 };
 
-
+function validateEmail(email) {
+  const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  return emailRegex.test(email);
+}
 
 
 const signInUser = (req, res) => {
