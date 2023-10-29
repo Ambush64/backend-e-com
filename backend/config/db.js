@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-require('dotenv').config();
 
 const connectDB = () => {
   const connection = mysql.createConnection({
@@ -12,13 +11,13 @@ const connectDB = () => {
   connection.connect((err) => {
     if (err) {
       console.error('MySQL Database connection FAIL');
-      throw err;
+      console.error(err); // Log the error for debugging
+      // Attempt to reconnect here, or handle the error as needed
+      // You can use a library like "mysql2" for connection pooling and automatic reconnection.
+    } else {
+      console.log('MySQL Database connection SUCCESS');
     }
-    console.log('MySQL Database connection SUCCESS');
   });
 
   return connection;
 };
-
-
-module.exports = { connectDB }
